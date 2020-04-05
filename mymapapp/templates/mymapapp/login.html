@@ -1,0 +1,32 @@
+{% extends 'mymapapp/index.html' %}
+
+{% block content %}
+
+<h1>
+    Welcome to my first Django Project!
+</h1>
+
+<p>
+    Here, you can sign up an account, log in, and input some details.<br/>
+    Also, you can view a map of your inputted lon & lat and see other users too.<br/>
+</p>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<form action="{% url 'mymapapp:login' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Log In">
+</form>
+
+<p>
+    Have no account yet? No fear, just <a href="{% url 'mymapapp:signup' %}">Sign Up</a>
+</p>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'mymapapp/index.html' %}
+
+{% block content %}
+
+<!-- Call the leaflet.js dependencies. -->
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'leaflet.css' %}"/>
+<script src="{% static 'leaflet.js' %}"></script>
+
+<!-- Create the map. -->
+<div id="mapid"></div>
+
+<!-- Script to draw the map. -->
+<script>
+
+    //Make the map center to the user's marker.
+    let map = L.map('mapid').setView([{{ user.profile.lngd }}, {{ user.profile.latd }}], 11);
+
+    //Give some attribution to the authors.
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+    //For loop each User and Profile that has been queried in view.py.
+    {% for profile in profiles %}
+        L.marker([{{ profile.lngd }}, {{ profile.latd }}])
+        .addTo(map)
+        .bindPopup(
+            '<p>' +
+            'User Name: {{ profile.user }}' +
+            '<br />Full Name: {{ profile.user.first_name }} {{ profile.user.last_name }}' +
+            '<br />Lon: {{ profile.lngd }}' +
+            '<br />Lat: {{ profile.latd }}' +
+            //Add extra link to home and log out for the logged in user pop up.
+            {% if profile.pk == user.profile.pk %}
+            '<br /><a href="{% url 'mymapapp:home' %}">Home</a>' +
+            '<br /><a href="{% url 'mymapapp:logout' %}">Log Out</a>' +
+            {% endif %}
+            '</p>'
+        )
+        //Open the pop up of the logged in user.
+        {% if profile.pk == user.profile.pk %}
+        .openPopup()
+        {% endif %}
+    {% endfor %}
+
+</script>
+
+{% endblock %}

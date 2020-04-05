@@ -1,0 +1,32 @@
+{% extends 'mymapapp/index.html' %}
+
+{% block content %}
+
+<h1>
+    This is a detail about you, {{ request.user }}!
+</h1>
+
+<p>
+    Note: If you want to open the map, be sure to <b>input</b> and save your <b>Longitude and Latitude</b>.
+</p>
+
+{% if messages %}
+    <!-- Just some message for the user to know. -->
+    {% for message in messages %}
+        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <input type="submit" value="Save">
+    <!-- Only show map button if longitude and latitude is not None -->
+    {% if prof.lngd != None and prof.latd != None %}
+        <a href="{% url 'mymapapp:map' %}" class="button">Open Map</a>
+    {% endif %}
+    <a href="{% url 'mymapapp:logout' %}" class="button">Log Out</a>
+</form>
+
+{% endblock %}

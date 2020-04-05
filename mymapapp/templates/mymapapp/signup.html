@@ -1,0 +1,28 @@
+{% extends 'mymapapp/index.html' %}
+
+{% block content %}
+
+<h1>
+    Sign Up Form
+</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {{ form.as_p }}
+    <input type="submit" value="Sign Up">
+</form>
+
+<p>
+    Already have an account? please <a href="{% url 'mymapapp:login' %}">Log In</a>
+</p>
+
+{% endblock %}

@@ -1,0 +1,105 @@
+/* A CSS to make the background dark and the elements light.
+** Also some styling to the buttons and input fields. */
+body {
+    background-color: #303030;
+    color: lightgray;
+    font-family: Verdana, Geneva, sans-serif;
+    text-align: center;
+}
+
+a {
+    color:lightgray;
+}
+
+a:hover {
+    color: lightgreen;
+}
+
+.error {
+    color: lightpink;
+}
+
+.success {
+    color: chartreuse;
+}
+
+input[type=text],
+input[type=password],
+input[type=number],
+input[type=email],
+textarea {
+    background-color: rgb(44, 44, 44);
+    color:aliceblue;
+    padding: 0.4rem 0.7rem;
+    border:1px solid #ccc; 
+    -webkit-border-radius: 11px;
+    border-radius: 11px;
+    transition-duration: 0.4s;
+    text-align: left;
+    -moz-appearance: textfield;
+}
+
+/* Make links (<a> tags with class button) appear like buttons*/
+input[type=submit], a.button {
+    padding:0.7rem 1.3rem; 
+    background: darkgreen;
+    color: aliceblue;
+    border:1px solid darkgreen;
+    cursor:pointer;
+    -webkit-border-radius: 31px;
+    border-radius: 31px;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+input[type=submit]:hover,
+a.button:hover {
+    background-color: rgb(21, 44, 26);
+    color: #ffffff;
+    text-decoration: none;
+    border: 1px solid;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+input[type=number]:focus,
+input[type=email]:focus,
+textarea:focus {
+    border:1px solid rgb(152, 207, 156); 
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/*Some extra CSS to help create the feeling of fullscreen map in some devices.*/
+#mapid {
+    height: 45rem;
+}
+
+@media screen and (max-width: 800px) {
+    #mapid {
+        height: 550px;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1024px) {
+    #mapid {
+        height: 600px;
+    }
+}
+
+@media screen and (min-width: 1025px) and (max-width: 1366px) {
+    #mapid {
+        height: 650px;
+    }
+}
+
+@media screen and (min-width: 1367px) and (max-width: 1920px) {
+    #mapid {
+        height: 720px;
+    }
+}
